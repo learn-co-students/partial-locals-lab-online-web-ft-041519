@@ -1,6 +1,5 @@
 class StudentsController < ApplicationController
   def new
-    @student = Student.new
   end
 
   def create
@@ -13,15 +12,17 @@ class StudentsController < ApplicationController
   end
 
   def edit
-    @student = Student.find(params[:id])
   end
 
   def show
-    @student = Student.find(params[:id])
   end
 
   def index
-    @students = Student.all
+    if params[:student]
+      @students = Student.search(params[:student][:name])
+    else
+      @students = Student.all
+    end
   end
 
   def student_params
